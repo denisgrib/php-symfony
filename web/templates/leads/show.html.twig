@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Leads{% endblock %}
+
+{% block body %}
+    <h1>Leads</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lead.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ lead.name }}</td>
+            </tr>
+            <tr>
+                <th>Source_id</th>
+                <td>{{ lead.sourceId }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ lead.status }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ lead.createdAt ? lead.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Created_by</th>
+                <td>{{ lead.createdBy }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('leads_index') }}">back to list</a>
+
+    <a href="{{ path('leads_edit', {'id': lead.id}) }}">edit</a>
+
+    {{ include('leads/_delete_form.html.twig') }}
+{% endblock %}

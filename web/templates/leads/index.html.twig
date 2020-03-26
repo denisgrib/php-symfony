@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Leads index{% endblock %}
+
+{% block body %}
+    <h1>Leads index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Source_id</th>
+                <th>Status</th>
+                <th>Created_at</th>
+                <th>Created_by</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lead in leads %}
+            <tr>
+                <td>{{ lead.id }}</td>
+                <td>{{ lead.name }}</td>
+                <td>{{ lead.sourceId }}</td>
+                <td>{{ lead.status }}</td>
+                <td>{{ lead.createdAt ? lead.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ lead.createdBy }}</td>
+                <td>
+                    <a href="{{ path('leads_show', {'id': lead.id}) }}">show</a>
+                    <a href="{{ path('leads_edit', {'id': lead.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('leads_new') }}">Create new</a>
+{% endblock %}

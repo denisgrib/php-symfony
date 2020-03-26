@@ -1,0 +1,17 @@
+services:
+  application_api.controller.abstract:
+    class: App\Controller\AbstractController
+    abstract: true
+    arguments:
+      - "@serializer"
+      - "@validator"
+      - "@doctrine_common_inflector"
+
+  application_api.controller.default:
+    class: App\Controller\DefaultController
+    parent: application_api.controller.abstract
+
+  application_api.controller.api:
+    class: App\Controller\ProjectController
+    parent: application_api.controller.abstract
+

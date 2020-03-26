@@ -1,0 +1,29 @@
+# Global
+.*.swp
+.DS_Store
+.idea
+
+###> symfony/framework-bundle ###
+/web/.env.local
+/web/.env.local.php
+/web/.env.*.local
+/web/config/secrets/prod/prod.decrypt.private.php
+/web/public/bundles/
+/web/var/
+/web/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/web/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+# Application
+web/app/vendor/
+web/app/doc/
+web/app/report/
+data/
+
+# SSL Certs
+etc/ssl/
