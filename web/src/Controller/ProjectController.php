@@ -64,16 +64,7 @@ class ProjectController extends AbstractController
         }
 
         try {
-            $data = json_decode($request->getContent());
-
-            $command = new CreateLeadCommand();
-            $command->name = $data->name ?? null;
-            $command->source_id = $data->source_id ?? null;
-            $command->status = $data->status ?? null;
-            $command->created_at = $data->created_at ?? null;
-            $command->created_by = $data->created_by ?? null;
-
-            $commandBus->handle($command);
+            $commandBus->handle(new CreateLeadCommand(json_decode($request->getContent())));
 
             return new JsonResponse(["status" => "ok"], Response::HTTP_OK);
         } catch (Exception $e) {
