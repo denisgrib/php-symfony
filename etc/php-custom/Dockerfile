@@ -72,6 +72,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin -
     # composer parallel install plugin
 #    && composer global require hirak/prestissimo
 
+#WORKDIR /var/www/html
+#CMD composer install ; wait-for-it database:3306 -- bin/console doctrine:migrations:migrate ;  php-fpm
+
 #RUN cd /var/www/html \
 #    && composer install -q
 #    && composer dump-autoload --optimize

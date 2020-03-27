@@ -16,28 +16,32 @@ services:
         restart: always
         depends_on:
             - php
-            - mysqldb
+
     php:
 #        image: nanoninja/php-fpm:${PHP_VERSION}
-        build: ./etc/php-custom
+        image: devilbox/php-fpm:7.4-work-0.106
+#        image: bitnami/php-fpm:7.4.4-prod
+#        build: ./etc/php-custom
         restart: always
-#        environment:
-#            PHP_IDE_CONFIG: 'serverName=docker'
-#            XDEBUG_CONFIG: '172.17.0.1'
+        environment:
+            PHP_IDE_CONFIG: 'serverName=docker'
+            XDEBUG_CONFIG: '172.17.0.1'
         expose:
             - 9000
         volumes:
-            - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-            - "./etc/php/php-fpm.conf:/usr/local/etc/php-fpm.conf"
-            - "./etc/php/php-fpm.d/docker.conf:/usr/local/etc/php-fpm.d/docker.conf"
-            - "./etc/php/php-fpm.d/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf"
+            - "./etc/php/run-script.sh:/startup.1.d/run-script.sh"
             - "./web:/var/www/html"
+        depends_on:
+            - mysqldb
 
 #    composer:
 #        image: "composer"
 #        volumes:
 #            - "./web:/app"
-#        command: update
+#        command: /bin/sh -c "composer install"
+#        depends_on:
+#            - php
+
 #    myadmin:
 #        image: phpmyadmin/phpmyadmin
 #        container_name: phpmyadmin
